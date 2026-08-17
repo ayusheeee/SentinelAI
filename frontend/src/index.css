@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-soc-bg: #070b14;
+  --color-soc-surface: #0c1322;
+  --color-soc-panel: #111b2e;
+  --color-soc-elevated: #162238;
+  --color-soc-border: #1e2d48;
+  --color-soc-muted: #8b9bb8;
+  --color-soc-text: #e8eefc;
+  --color-soc-accent: #2dd4bf;
+  --color-soc-accent-dim: rgba(45, 212, 191, 0.12);
+  --color-critical: #f43f5e;
+  --color-high: #fb923c;
+  --color-medium: #facc15;
+  --color-low: #34d399;
+  --color-info: #38bdf8;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-soc-bg);
+  color: var(--color-soc-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #243552 transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #243552;
+  border-radius: 999px;
+}
