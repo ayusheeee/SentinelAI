@@ -53,9 +53,27 @@ export function AlertDetailPage() {
         </Panel>
 
         <Panel title="Detection mapping">
-          <Field label="Sigma rule" value={alert.sigmaRule} mono />
+          <div>
+            <dt className="text-[11px] uppercase tracking-wider text-soc-muted">Sigma rule</dt>
+            <dd className="mt-1">
+              <Link
+                to={`/sigma`}
+                className="font-mono text-xs text-soc-accent hover:underline"
+              >
+                {alert.sigmaRule} →
+              </Link>
+            </dd>
+          </div>
           <div className="mt-4">
-            <Field label="MITRE technique" value={`${alert.mitreId} — ${alert.mitreTechnique}`} />
+            <dt className="text-[11px] uppercase tracking-wider text-soc-muted">MITRE technique</dt>
+            <dd className="mt-1">
+              <Link
+                to={`/mitre/${encodeURIComponent(alert.mitreId)}`}
+                className="font-mono text-xs text-soc-accent hover:underline"
+              >
+                {alert.mitreId} — {alert.mitreTechnique} →
+              </Link>
+            </dd>
           </div>
         </Panel>
       </div>

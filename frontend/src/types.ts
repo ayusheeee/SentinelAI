@@ -37,13 +37,28 @@ export type Incident = {
 
 export type LogEvent = {
   id: string
-  timestamp: string
-  source: string
-  host: string
-  user: string
-  eventType: string
-  message: string
-  severity: Severity
+  timestamp: string | null
+  source_ip?: string | null
+  destination_ip?: string | null
+  user: string | null
+  host: string | null
+  event_type?: string | null
+  eventType?: string
+  action?: string | null
+  status?: string | null
+  message: string | null
+  severity: Severity | null
+  source?: string
+  raw?: string
+}
+
+export type LogUploadResponse = {
+  success: boolean
+  filename?: string
+  format?: string
+  total_events?: number
+  events?: LogEvent[]
+  error?: string
 }
 
 export type TimelineEvent = {

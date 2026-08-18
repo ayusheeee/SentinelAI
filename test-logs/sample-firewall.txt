@@ -1,0 +1,3 @@
+timestamp="2026-08-18T11:00:15Z" host="edge-firewall" src="192.0.2.1" dst="10.0.10.5" action="block" severity="high" msg="TCP SYN flood attempt detected"
+timestamp="2026-08-18T11:01:22Z" host="edge-firewall" src="10.0.1.15" dst="93.184.216.34" user="dev_ops" action="allow" severity="info" msg="HTTPS outbound traffic approved"
+timestamp="2026-08-18T11:05:08Z" host="edge-firewall" src="198.18.0.99" dst="10.0.2.22" action="deny" severity="critical" msg="SSH brute-force rate limit exceeded"

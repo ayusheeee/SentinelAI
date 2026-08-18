@@ -1,0 +1,3 @@
+CEF:0|PaloAltoNetworks|PAN-OS|10.0.0|TRAFFIC|drop|7|src=198.51.100.22 dst=10.0.0.80 suser=attacker dhost=web-dmz-01 msg="Inbound port scan detected and dropped" act=block
+CEF:0|PaloAltoNetworks|PAN-OS|10.0.0|TRAFFIC|allow|2|src=10.0.2.14 dst=172.16.0.4 suser=j.chen dhost=db-prod-02 msg="Standard SQL query session" act=allow
+CEF:0|CheckPoint|VPN-1|R81|AUTH|failed|8|src=203.0.113.50 dst=10.0.0.1 suser=svc_admin msg="RADIUS authentication failure - brute force attempt" act=deny

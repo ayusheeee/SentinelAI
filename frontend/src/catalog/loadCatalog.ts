@@ -24,6 +24,7 @@ export type DetectionCatalog = {
   techniquesById: Map<string, AttackTechnique>
   rulesById: Map<string, SigmaRuleRecord>
   rulesByTechnique: Map<string, SigmaRuleRecord[]>
+  subtechniquesByParent: Map<string, AttackTechnique[]>
   tactics: string[]
   sigmaStatuses: string[]
   sigmaLevels: string[]
@@ -34,6 +35,15 @@ function indexCatalog(mitre: MitreCatalog, sigma: SigmaCatalog): DetectionCatalo
   const techniquesById = new Map(mitre.techniques.map((technique) => [technique.id, technique]))
   const rulesById = new Map(sigma.rules.map((rule) => [rule.id, rule]))
   const rulesByTechnique = new Map<string, SigmaRuleRecord[]>()
+  const subtechniquesByParent = new Map<string, AttackTechnique[]>()
+
+  for (const technique of mitre.techniques) {
+    if (technique.parentId) {
+      const children = subtechniquesByParent.get(technique.parentId) ?? []
+      children.push(technique)
+      subtechniquesByParent.set(technique.parentId, children)
+    }
+  }
 
   for (const rule of sigma.rules) {
     for (const techniqueId of rule.mitreTechniques) {
@@ -54,6 +64,7 @@ function indexCatalog(mitre: MitreCatalog, sigma: SigmaCatalog): DetectionCatalo
     techniquesById,
     rulesById,
     rulesByTechnique,
+    subtechniquesByParent,
     tactics,
     sigmaStatuses,
     sigmaLevels,
@@ -73,12 +84,23 @@ export function loadDetectionCatalog(): Promise<DetectionCatalog> {
   return catalogPromise
 }
 
-export function relatedSigmaRules(catalog: DetectionCatalog, techniqueId: string) {
+export function ruleCountMap(rulesByTechnique: Map<string, SigmaRuleRecord[]>): Map<string, number> {
+  const counts = new Map<string, number>()
+  for (const [id, rules] of rulesByTechnique) {
+    counts.set(id, rules.length)
+  }
+  return counts
+}
+
+export function relatedSigmaRules(catalog: DetectionCatalog, techniqueId: string): SigmaRuleRecord[] {
   const direct = catalog.rulesByTechnique.get(techniqueId) ?? []
-  const parent = catalog.techniquesById.get(techniqueId)?.parentId
-  const parentRules = parent ? (catalog.rulesByTechnique.get(parent) ?? []) : []
+  const parentId = catalog.techniquesById.get(techniqueId)?.parentId
+  const parentRules = parentId ? (catalog.rulesByTechnique.get(parentId) ?? []) : []
+  const children = catalog.subtechniquesByParent.get(techniqueId) ?? []
+  const childRules = children.flatMap((child) => catalog.rulesByTechnique.get(child.id) ?? [])
+
   const seen = new Set<string>()
-  return [...direct, ...parentRules].filter((rule) => {
+  return [...direct, ...parentRules, ...childRules].filter((rule) => {
     if (seen.has(rule.id)) return false
     seen.add(rule.id)
     return true

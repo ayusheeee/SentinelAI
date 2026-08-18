@@ -1,0 +1,6 @@
+timestamp,source_ip,destination_ip,user,host,event_type,action,status,severity,message
+2026-08-18T10:15:02Z,192.168.1.105,10.0.0.5,j.miller,dc-01.corp.local,4625,logon,failure,high,An account failed to log on with bad password.
+2026-08-18T10:15:20Z,192.168.1.105,10.0.0.5,j.miller,dc-01.corp.local,4624,logon,success,info,An account was successfully logged on.
+2026-08-18T10:18:44Z,10.0.21.84,185.12.44.90,svc.backup,wkstn-214.corp.local,1,process_create,execute,critical,Process creation: powershell.exe -enc JABzAD0ATgBlAHcALQBP...
+2026-08-18T10:22:11Z,10.0.30.15,51.15.123.88,n.patel,file-gw-02,TRANSFER,upload,success,medium,4.8 GB archive transfer to unsanctioned IP.
+2026-08-18T10:30:00Z,185.220.101.44,10.0.4.12,administrator,edge-fw-01,DENY,block,blocked,high,Inbound TCP 445 SMB connection blocked by geo-policy.

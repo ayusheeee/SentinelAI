@@ -97,7 +97,9 @@ export function InvestigationDetailPage() {
           <ul className="space-y-2">
             {investigation.sigmaMatches.map((rule) => (
               <li key={rule} className="rounded-lg border border-soc-border bg-soc-elevated/40 px-3 py-2 font-mono text-xs">
-                {rule}
+                <Link to="/sigma" className="text-soc-accent hover:underline">
+                  {rule} →
+                </Link>
               </li>
             ))}
           </ul>
@@ -106,7 +108,12 @@ export function InvestigationDetailPage() {
           <ul className="space-y-2">
             {investigation.mitreMappings.map((technique) => (
               <li key={technique.id} className="rounded-lg border border-soc-border bg-soc-elevated/40 px-3 py-2">
-                <span className="font-mono text-xs text-soc-accent">{technique.id}</span>
+                <Link
+                  to={`/mitre/${encodeURIComponent(technique.id)}`}
+                  className="font-mono text-xs text-soc-accent hover:underline font-medium"
+                >
+                  {technique.id}
+                </Link>
                 <span className="ml-2 text-sm text-soc-text">{technique.name}</span>
               </li>
             ))}

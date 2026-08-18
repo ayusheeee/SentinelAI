@@ -1,0 +1,5 @@
+Aug 18 10:14:02 auth-srv-01 sshd[14201]: Failed password for invalid user root from 185.220.101.44 port 48210 ssh2
+Aug 18 10:14:05 auth-srv-01 sshd[14202]: Failed password for invalid user admin from 185.220.101.44 port 48214 ssh2
+Aug 18 10:15:30 auth-srv-01 sshd[14220]: Accepted publickey for ubuntu from 10.0.1.50 port 51200 ssh2
+Aug 18 10:16:11 auth-srv-01 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/bin/systemctl restart nginx
+Aug 18 10:20:45 auth-srv-01 sshd[14300]: Failed password for user alex from 10.0.21.84 port 54112 ssh2
